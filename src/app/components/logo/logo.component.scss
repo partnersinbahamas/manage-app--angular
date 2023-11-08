@@ -1,0 +1,15 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 24px;
+
+  &__part {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    font-size: 32px;
+  }
+}

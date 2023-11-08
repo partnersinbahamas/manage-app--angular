@@ -1,0 +1,13 @@
+.title {
+  &__main {
+    font-size: 100px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  &__sub {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba($color: #fff, $alpha: .7);
+  }
+}

@@ -1,0 +1,31 @@
+@import '../styles/mixins.scss';
+
+.app {
+  height: 100vh;
+//   overflow: hidden
+
+  &__logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  &__container {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 10px 80px;
+
+    margin-top: 100px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  &__main {
+    position: relative;
+    width: 40%;
+  }
+}
