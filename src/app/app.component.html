@@ -3,12 +3,29 @@
     <logo></logo>
   </div>
   <div class="app__container">
-    <main-title></main-title>
+    <div class="app__wrapper">
+      <div
+        class="app__pages"
+        [class.app__pages-move]="href !== 'about'"
+      >
+        <div class="app__page">
+          main
+          <main-title></main-title>
+        </div>
+
+        <div class="app__page">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+      <nav class="app__nav">
+        <app-nav *ngFor="let nav of navs" [nav]="nav"/>
+      </nav>
+    </div>
 
     <main class="app__main">
       <todos></todos>
     </main>
   </div>
 
-  <router-outlet></router-outlet>
 </section>
