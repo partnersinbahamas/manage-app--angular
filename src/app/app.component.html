@@ -1,10 +1,12 @@
 <section class="app">
   <div class="app__logo">
     <logo></logo>
+    <!-- {{ todosCount | async }} -->
   </div>
   <div class="app__container">
     <div class="app__wrapper">
-      <div
+      <div class="app__shell">
+        <div
         class="app__pages"
         [class.app__pages-move]="href !== 'about'"
       >
@@ -17,12 +19,13 @@
           <router-outlet></router-outlet>
         </div>
       </div>
-
-      <nav class="app__nav">
-        <app-nav *ngFor="let nav of navs" [nav]="nav"/>
-      </nav>
     </div>
 
+    <nav class="app__nav">
+      <app-nav *ngFor="let nav of navs" [nav]="nav"/>
+    </nav>
+
+      </div>
     <main class="app__main">
       <todos></todos>
     </main>

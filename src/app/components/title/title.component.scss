@@ -1,8 +1,14 @@
+@import '../../../styles/mixins.scss';
+
 .title {
   &__main {
-    font-size: 100px;
+    font-size: 30px;
     font-weight: 700;
     margin: 0;
+
+    @include desktop() {
+      font-size: 100px;
+    }
   }
 
   &__sub {

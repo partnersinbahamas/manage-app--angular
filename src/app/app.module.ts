@@ -8,6 +8,9 @@ import { LogoComponent } from './components/logo/logo.component';
 import { NavComponent } from './components/nav/nav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
+import { IconButtonComponent } from './components/buttons/icon-button/icon-button.component';
+import { TodoComponent } from './components/todos/todo/todo.component';
+import { DayComponent } from './components/day/day.component';
 
 const routes: Routes = [
   {
@@ -35,6 +38,9 @@ const routes: Routes = [
     LogoComponent,
     NavComponent,
     IconComponent,
+    IconButtonComponent,
+    TodoComponent,
+    DayComponent,
   ],
   imports: [
     BrowserModule,

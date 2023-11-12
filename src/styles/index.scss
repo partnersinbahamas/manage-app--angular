@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 @import '../styles/variables.scss';
+@import '../styles/mixins.scss';
 
 * {
   color: #fff;
@@ -7,11 +8,13 @@
   margin: 0;
 }
 
-
-
 body {
   margin: 0;
   padding: 0;
   background-color: $color-grey--main;
-  overflow: hidden;
+  min-height: 100vh;
+
+  @include desktop() {
+    overflow: hidden;
+  }
 }

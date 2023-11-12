@@ -2,10 +2,11 @@
 @import './../styles/variables.scss';
 
 .app {
-  height: calc(100vh - 140px);
+  @include desktop() {
+    height: calc(100vh - 140px);
+  }
 
   &__logo {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,33 +16,54 @@
   &__container {
     box-sizing: border-box;
     height: 100%;
-    padding: 10px 80px;
-
-    margin-top: 100px;
+    padding: 20px;
 
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 50px;
+
+    @include desktop() {
+      flex-direction: row;
+      width: 100%;
+      margin-top: 100px;
+      padding: 10px 80px;
+    }
+  }
+
+  &__shell {
+    overflow: hidden;
+    height: 100%;
   }
 
   &__main {
     position: relative;
-    width: 40%;
-    height: 100%;
+    width: 100%;
+
+    @include desktop() {
+      width: 40%;
+    }
   }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%;
-    width: 50%;
     overflow: hidden;
+    height: calc(100vh - 60px);
+    width: 100%;
+
+    @include desktop() {
+      width: 50%;
+      height: calc(100vh - 160px);
+    }
   }
 
   &__pages {
     height: 100%;
     transition: .5s;
+
 
     &-move {
       transform: translateY(-100%);
@@ -56,11 +78,15 @@
     z-index: 1;
     background-color: $color-grey--light;
     padding: 30px 80px;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+
+    @include desktop() {
+      border-radius: 20px 20px 0 0;
+    }
   }
 }

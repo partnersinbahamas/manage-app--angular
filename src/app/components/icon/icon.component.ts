@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./icon.component.scss'],
 })
 export class IconComponent {
-  @Input() img!: any;
+  @Input() img!: string;
 }

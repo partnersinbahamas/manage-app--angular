@@ -1,0 +1,13 @@
+.iconButton {
+  background-color: transparent;
+  transition: .3s;
+  border: 0;
+
+  &:active {
+    transform: scale(.8);
+  }
+
+  > * {
+    font-size: 30px;
+  }
+}
