@@ -24,7 +24,7 @@ export class TodosService {
     return this.localeStorage.saveData(key, data);
   }
 
-  addTodo(todo: any) {
+  addTodo(todo: Todo) {
     const updatedTodo = [...this.todos$$.getValue(), todo];
     this.todos$$.next(updatedTodo);
     this.saveToStorage('todos', updatedTodo);

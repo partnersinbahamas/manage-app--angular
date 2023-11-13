@@ -1,3 +1,32 @@
 <li class="todo">
-  <h1>{{ todo.title }}</h1>
+  <p
+    class="todo__importants"
+    [class]="{
+      'todo__importants-weak': todo.importants === 'weak',
+      'todo__importants-avarage': todo.importants === 'avarage',
+      'todo__importants-strong': todo.importants === 'strong',
+    }"
+  >
+  </p>
+
+  <form class="todo__form" (ngSubmit)="onSave()">
+    <h1
+      (dblclick)="onFocus()"
+      class="todo__field"
+      *ngIf="!isEditing; else inputBlock"
+    >
+      {{ todo.title }}
+    </h1>
+
+    <ng-template #inputBlock>
+      <input
+        #titleField
+        type="text"
+        class="todo__field"
+        placeholder="Type a To Do name"
+        [value]="title"
+        (blur)="onSave()"
+      >
+    </ng-template>
+  </form>
 </li>

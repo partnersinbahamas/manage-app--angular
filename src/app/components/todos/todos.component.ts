@@ -23,6 +23,8 @@ export class TodosComponent {
 
     if (!currentDay) {
       this.calendarService.createDay();
+    } else {
+      this.calendarService.createTodoByDate(formatDate(new Date()));
     }
   }
 

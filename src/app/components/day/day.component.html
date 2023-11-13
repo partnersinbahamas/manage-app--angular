@@ -1,15 +1,21 @@
 <li class="day">
-  <div class="day__header">
-      <h1 class="day__title">{{ formatedDay }}</h1>
-
-      <div class="day__formats">
-        <span class="day__format">
-          {{calendatDay}}
-        </span>
-
-        <span class="day__format">
-          {{day.date}}
-        </span>
+  <button class="day__button">
+    <div class="day__header">
+        <h1 class="day__title">{{ formatedDay }}</h1>
+  
+        <div class="day__formats">
+          <span class="day__format">
+            {{calendatDay}}
+          </span>
+  
+          <span class="day__format">
+            {{day.date}}
+          </span>
+        </div>
       </div>
-    </div>
+  </button>
+
+  <ul class="day__list">
+    <app-todo *ngFor="let todo of day.todos;let i = index; trackBy: trackById" [todo]="todo"/>
+  </ul>
 </li>

@@ -11,6 +11,7 @@ import { IconComponent } from './components/icon/icon.component';
 import { IconButtonComponent } from './components/buttons/icon-button/icon-button.component';
 import { TodoComponent } from './components/todos/todo/todo.component';
 import { DayComponent } from './components/day/day.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -45,6 +46,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

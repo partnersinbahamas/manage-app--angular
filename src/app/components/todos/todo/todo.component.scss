@@ -1,0 +1,45 @@
+@import '../../../../styles/variables.scss';
+
+.todo {
+  position: relative;
+  padding: 5px;
+
+  &__importants {
+    position: absolute;
+    left: -10px;
+    top: 0;
+    bottom: 0;
+    background-color: $color-orange;
+    border-radius: 3px;
+
+    height: 100%;
+    width: 5px;
+
+    &-weak {
+      background-color: $color-blue;
+    }
+
+    &-avarage {
+      background-color: $color-orange;
+    }
+
+    &-strong {
+      background-color: $color-red;
+    }
+  }
+
+  &__form {
+    display: flex;
+    align-items: center;
+  }
+
+  &__field {
+    background-color: transparent;
+    border: 0;
+
+    &:focus {
+      outline: 0;
+      border-bottom: 2px solid #fff;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Day } from 'src/app/types/day';
+import { Todo } from 'src/app/types/todo';
 import { formatRelativeDate, getCalendarDay } from 'src/helpers/functions';
 
 @Component({
@@ -18,5 +19,9 @@ export class DayComponent implements OnInit{
   ngOnInit(): void {
     this.formatedDay = formatRelativeDate(this.day.date);
     this.calendatDay = getCalendarDay(this.day.date);
+  }
+
+  trackById(i: number, todo: Todo) {
+    return todo.id;
   }
 }
