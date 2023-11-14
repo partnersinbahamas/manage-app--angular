@@ -5,12 +5,13 @@ import { TodosService } from 'src/app/services/todos.service';
 import { Day } from 'src/app/types/day';
 import { formatDate } from 'src/helpers/functions';
 
+
 @Component({
-  selector: 'todos',
-  templateUrl: './todos.component.html',
-  styleUrls: ['./todos.component.scss']
+  selector: 'app-days',
+  templateUrl: './days.component.html',
+  styleUrls: ['./days.component.scss']
 })
-export class TodosComponent {
+export class DaysComponent {
   calendar: Day[] = [];
   constructor(
     private todosService: TodosService,
@@ -22,7 +23,7 @@ export class TodosComponent {
     let currentDay = this.calendar.find((day: Day) => day.date === currentDate);
 
     if (!currentDay) {
-      this.calendarService.createDay();
+      this.calendarService.createDay(formatDate(new Date()));
     } else {
       this.calendarService.createTodoByDate(formatDate(new Date()));
     }
@@ -32,6 +33,10 @@ export class TodosComponent {
     this.calendarService.calendar$
       .subscribe(calendar => {
         this.calendar = calendar
-      })
+      });
+
+      if (!this.calendar.length) {
+        this.calendarService.createWeek();
+      }
   }
 }

@@ -37,12 +37,13 @@
     height: 100%;
   }
 
-  &__main {
-    position: relative;
+  &__days {
     width: 100%;
 
     @include desktop() {
+      position: relative;
       width: 40%;
+      height: calc(100vh - 164px);
     }
   }
 
@@ -51,19 +52,19 @@
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 90px);
     width: 100%;
 
     @include desktop() {
       width: 50%;
-      height: calc(100vh - 160px);
+    height: calc(100vh - 164px);
+
     }
   }
 
   &__pages {
     height: 100%;
     transition: .5s;
-
 
     &-move {
       transform: translateY(-100%);

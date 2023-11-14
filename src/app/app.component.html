@@ -3,32 +3,33 @@
     <logo></logo>
     <!-- {{ todosCount | async }} -->
   </div>
+
   <div class="app__container">
     <div class="app__wrapper">
       <div class="app__shell">
         <div
-        class="app__pages"
-        [class.app__pages-move]="href !== 'about'"
-      >
-        <div class="app__page">
-          main
-          <main-title></main-title>
-        </div>
+          class="app__pages"
+          [class.app__pages-move]="href !== 'about'"
+        >
+          <div class="app__page">
+            main
+            <main-title></main-title>
+          </div>
 
-        <div class="app__page">
-          <router-outlet></router-outlet>
+          <div class="app__page">
+            <router-outlet></router-outlet>
+          </div>
         </div>
       </div>
+
+      <nav class="app__nav">
+        <app-nav *ngFor="let nav of navs" [nav]="nav"/>
+      </nav>
     </div>
-
-    <nav class="app__nav">
-      <app-nav *ngFor="let nav of navs" [nav]="nav"/>
-    </nav>
-
-      </div>
-    <main class="app__main">
-      <todos></todos>
-    </main>
+  
+    <div class="app__days">
+      <app-days></app-days>
+    </div>
   </div>
 
 </section>

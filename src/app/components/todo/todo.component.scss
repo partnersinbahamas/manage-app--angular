@@ -1,8 +1,9 @@
-@import '../../../../styles/variables.scss';
+@import '../../../styles/variables.scss';
 
 .todo {
   position: relative;
   padding: 5px;
+  min-height: 50px;
 
   &__importants {
     position: absolute;
@@ -36,6 +37,7 @@
   &__field {
     background-color: transparent;
     border: 0;
+    height: 30px;
 
     &:focus {
       outline: 0;

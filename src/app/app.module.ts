@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { TodoComponent } from './components/todo/todo.component';
 import { TitleComponent } from './components/title/title.component';
-import { TodosComponent } from './components/todos/todos.component';
+import { DaysComponent } from './components/days/days.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { NavComponent } from './components/nav/nav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
 import { IconButtonComponent } from './components/buttons/icon-button/icon-button.component';
-import { TodoComponent } from './components/todos/todo/todo.component';
-import { DayComponent } from './components/day/day.component';
+import { DayComponent } from './components/days/day/day.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
@@ -35,12 +35,12 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     TitleComponent,
-    TodosComponent,
     LogoComponent,
     NavComponent,
     IconComponent,
-    IconButtonComponent,
     TodoComponent,
+    IconButtonComponent,
+    DaysComponent,
     DayComponent,
   ],
   imports: [

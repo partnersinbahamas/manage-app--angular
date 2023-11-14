@@ -1,11 +1,11 @@
-<section class="todos">
-  <div class="todos__header">
-    <h1 class="todos__title">To Do</h1>
+<section class="days">
+  <div class="days__header">
+    <h1 class="days__title">To Do</h1>
 
      <app-icon-button (action)="onAdd()"/>
   </div>
 
-  <ul class="todos__list">
+  <ul class="days__list">
     <app-day *ngFor="let day of calendar" [day]="day"/>
   </ul>
 </section>

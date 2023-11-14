@@ -22,10 +22,12 @@
       <input
         #titleField
         type="text"
+        name="title"
         class="todo__field"
         placeholder="Type a To Do name"
-        [value]="title"
+        [(ngModel)]="title"
         (blur)="onSave()"
+        (keyup.escape)="isEditing = false"
       >
     </ng-template>
   </form>
