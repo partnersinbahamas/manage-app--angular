@@ -39,10 +39,10 @@ export class TodoComponent implements OnInit {
 
     console.log(this.title);
 
-    this.calendarService
-      .updateTodoByDate(
-        formatDate(new Date()),
-        { ...this.todo, title: this.title} /// ?
-      );
+    // this.calendarService
+    //   .updateTodoByDate(
+    //     formatDate(new Date()),
+    //     { ...this.todo, title: this.title} /// ?
+    //   );  // in develop phase
   }
 }

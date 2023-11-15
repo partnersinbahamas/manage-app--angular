@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-icon-button',
@@ -7,4 +7,5 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class IconButtonComponent {
   @Output() action = new EventEmitter();
+  @Input() img!: string;
 }

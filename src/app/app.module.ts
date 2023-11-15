@@ -4,14 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { TitleComponent } from './components/title/title.component';
-import { DaysComponent } from './components/days/days.component';
+import { WeeksComponent } from './components/weeks/weeks.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { NavComponent } from './components/nav/nav.component';
 import { RouterModule, Routes } from '@angular/router';
 import { IconComponent } from './components/icon/icon.component';
 import { IconButtonComponent } from './components/buttons/icon-button/icon-button.component';
-import { DayComponent } from './components/days/day/day.component';
+import { DayComponent } from './components/weeks/day/day.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { WeekComponent } from './components/weeks/week/week.component';
 
 const routes: Routes = [
   {
@@ -40,8 +41,9 @@ const routes: Routes = [
     IconComponent,
     TodoComponent,
     IconButtonComponent,
-    DaysComponent,
+    WeeksComponent,
     DayComponent,
+    WeekComponent,
   ],
   imports: [
     BrowserModule,

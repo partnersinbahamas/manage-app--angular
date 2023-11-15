@@ -1,0 +1,16 @@
+<section class="weeks">
+  <div class="weeks__header">
+    <h1 class="weeks__title">To Do</h1>
+
+     <app-icon-button (action)="onAdd()" [img]="'bx bxs-folder-plus'"/>
+
+     <app-icon-button (action)="onWeekUnShift()" [img]="'bx bxs-left-arrow'"/>
+     <app-icon-button (action)="onWeekShift()" [img]="'bx bxs-right-arrow'"/>
+  </div>
+
+  <ul
+    class="weeks__list"
+    [ngStyle]="{ 'transform': 'translateX(' + weeksShift + 'px)' }">
+    <app-week *ngFor="let week of calendar" [week]="week" (onDayInit)="onDayElementInit($event)"/>
+  </ul>
+</section>

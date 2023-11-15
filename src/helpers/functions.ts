@@ -43,25 +43,26 @@ export function formatRelativeDate(inputDate: string): string {
   } else if (dayDiff === -1) {
     return 'Yesterday';
   } else if (dayDiff > 0 && dayDiff <= daysUntilNextSunday) {
-    return 'On week';
+    return 'This week';
   } else if (dayDiff > daysUntilNextSunday && dayDiff <= 7) {
     return 'Next week';
   } else if (dayDiff > 7 && dayDiff <= 30) {
-    return 'Last month';
+    return 'This month';
   } else if (dayDiff > 30 && dayDiff <= 365) {
-    return 'Last year';
+    return 'This year';
   } else if (dayDiff < 0 && dayDiff >= -daysUntilNextSunday) {
-    return 'On week';
+    return 'This week';
   } else if (dayDiff < -daysUntilNextSunday && dayDiff >= -7) {
-    return 'Next week';
+    return 'Last week';
   } else if (dayDiff < -7 && dayDiff >= -30) {
-    return 'Next month';
+    return 'Last month';
   } else if (dayDiff < -30 && dayDiff >= -365) {
-    return 'Next year';
+    return 'Last year';
   } else {
     return 'More than a year';
   }
 }
+
 
 
 
