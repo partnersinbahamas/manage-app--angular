@@ -13,6 +13,7 @@ import { IconButtonComponent } from './components/buttons/icon-button/icon-butto
 import { DayComponent } from './components/weeks/day/day.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeekComponent } from './components/weeks/week/week.component';
+import { MonthPipe } from './pipes/month.pipe';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'details',
+    path: 'details/:week/:day',
     component:  TitleComponent,
   },
 
@@ -44,6 +45,7 @@ const routes: Routes = [
     WeeksComponent,
     DayComponent,
     WeekComponent,
+    MonthPipe,
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,25 @@
+import { daysOfWeek } from "./variables";
+import { months } from "./variables";
+
 export function getMaxId(array: any[]) {
   let maxId = 0;
 
   for (const item of array) {
     if (item.id > maxId) {
       maxId = item.id;
+    }
+  }
+
+  return maxId + 1;
+}
+
+
+export function incrementDaysIds(array: any[]) {
+  let maxId = 0;
+
+  for (const week of array) {
+    for (const day of week.days) {
+      maxId = Math.max(maxId, day.id);
     }
   }
 
@@ -63,18 +79,19 @@ export function formatRelativeDate(inputDate: string): string {
   }
 }
 
+export function getCalendarDay(inputDate: string): string {
+  const dateParts = inputDate.split('.');
+  const day = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10) - 1; // Месяцы в JavaScript начинаются с 0
+  const year = parseInt(dateParts[2], 10);
 
+  const dayOfWeek = new Date(year, month, day).getDay();
 
+  return daysOfWeek[dayOfWeek];
+}
 
-  export function getCalendarDay(inputDate: string): string {
-    const dateParts = inputDate.split('.');
-    const day = parseInt(dateParts[0], 10);
-    const month = parseInt(dateParts[1], 10) - 1; // Месяцы в JavaScript начинаются с 0
-    const year = parseInt(dateParts[2], 10);
-  
-    const dayOfWeek = new Date(year, month, day).getDay();
-    
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  
-    return daysOfWeek[dayOfWeek];
-  }
+export function getMonth(date: string) {
+  const monthNum: string = date.split('.')[1] || '01';
+
+  return months[monthNum];
+}

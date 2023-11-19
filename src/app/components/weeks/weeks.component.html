@@ -1,16 +1,50 @@
-<section class="weeks">
+<section class="weeks" #weekEl>
   <div class="weeks__header">
-    <h1 class="weeks__title">To Do</h1>
+    <article class="weeks__wrapper">
+      <div class="weeks__dates"> 
+        <p class="weeks__dates_date">{{selectedWeek?.startFrom}}</p>
 
-     <app-icon-button (action)="onAdd()" [img]="'bx bxs-folder-plus'"/>
+        <span class="weeks__slash">-</span>
+  
+        <p class="weeks__dates_date">{{selectedWeek?.endTo}}</p>
+      </div>
 
-     <app-icon-button (action)="onWeekUnShift()" [img]="'bx bxs-left-arrow'"/>
-     <app-icon-button (action)="onWeekShift()" [img]="'bx bxs-right-arrow'"/>
+      <div class="weeks__months">
+          <p class="weeks__month">{{selectedWeek?.startFrom! | month}}</p>
+          <!-- <p class="weeks__dates_date">{{currentWeek?.endTo! | month}}</p> -->
+
+          <ng-container
+            *ngIf="
+              (selectedWeek?.startFrom! | month) !== (selectedWeek?.endTo! | month)
+            "
+          >
+          <span class="weeks__slash">-</span>
+          <p class="weeks__month">{{selectedWeek?.endTo! | month}}</p>
+
+          </ng-container>
+      </div>
+    </article>
+
+
+    <div class="weeks__buttons">
+      <app-icon-button (action)="onAdd()" [img]="'bx bxs-folder-plus'"/>
+  
+      <div>
+        <app-icon-button (action)="onWeekUnShift()" [img]="'bx bxs-left-arrow'"/>
+        <app-icon-button (action)="onWeekShift()" [img]="'bx bxs-right-arrow'"/>
+      </div>
+    </div>
   </div>
 
   <ul
     class="weeks__list"
-    [ngStyle]="{ 'transform': 'translateX(' + weeksShift + 'px)' }">
-    <app-week *ngFor="let week of calendar" [week]="week" (onDayInit)="onDayElementInit($event)"/>
+    [ngStyle]="{ 'transform': 'translateX(' + weeksShift + 'px)' }"
+  >
+
+    <app-week
+      *ngFor="let week of weeks; trackBy: trackById"
+      [week]="week"
+      (onDayInit)="onDayElementInit($event)"
+    />
   </ul>
 </section>

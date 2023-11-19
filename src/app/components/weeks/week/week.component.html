@@ -1,5 +1,8 @@
-<li class="week" #weekEl>
+<div class="week" #weekEl>
   <ul class="week__list">
-    <app-day *ngFor="let day of week.days" [day]="day"/>
+    <app-day
+      *ngFor="let day of week.days; trackBy: trackById"
+      [day]="day"
+    />
   </ul>
-</li>
+</div>

@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CalendarService } from 'src/app/services/calendar.service';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { WeeksService } from 'src/app/services/weeks.service';
 import { Todo } from 'src/app/types/todo';
-import { formatDate } from 'src/helpers/functions';
 
 @Component({
   selector: 'app-todo',
@@ -22,7 +20,7 @@ export class TodoComponent implements OnInit {
   }
 
   constructor(
-    private calendarService: CalendarService,
+    private weeksService: WeeksService,
   ) {}
 
   ngOnInit(): void {

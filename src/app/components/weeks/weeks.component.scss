@@ -4,6 +4,7 @@
 .weeks {
   box-sizing: border-box;
   border-radius: 20px;
+  // border: 5px solid transparent;
   padding: 10px 20px;
   overflow: hidden;
 
@@ -17,8 +18,31 @@
     border-radius: 20px 20px 0 0;
   }
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
+
   &__title {
     font-size: 46px;
+  }
+
+  &__dates {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+
+    >* {
+      color: $color-grey-shrift;
+    }
+
+    &_date {
+      font-size: 12px;
+      font-weight: 700;
+    }
   }
 
   &__list {
@@ -31,9 +55,36 @@
     transition: transform 1s;
   }
 
-  &__header {
+  &__buttons {
+    display: flex;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__months {
     display: flex;
     flex-direction: row;
     align-items: center;
+    gap: 5px;
+
+    >* {
+      color: $color-grey-shrift-light;
+    }
+  }
+
+  &__month {
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  &__slash {
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

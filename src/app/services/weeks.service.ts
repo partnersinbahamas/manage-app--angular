@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocaleStorageServiceService } from './locale-storage-service.service';
-import { formatDate, getMaxId } from 'src/helpers/functions';
+import { formatDate, getMaxId, getMonth, incrementDaysIds } from 'src/helpers/functions';
 import { Day } from '../types/day';
 import { Week } from '../types/week';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarService {
-  private calendar$$ = new BehaviorSubject<any[]>([]);
-  calendar$ = this.calendar$$.asObservable();
+export class WeeksService {
+  private weeks$$ = new BehaviorSubject<Week[]>([]);
+  private selectedWeek$$ =  new BehaviorSubject<any | null>(null);
+
+  selectedWeek$ = this.selectedWeek$$.asObservable();
+  weeks$ = this.weeks$$.asObservable();
 
   constructor(
     private localeStorage: LocaleStorageServiceService,
   ) {
-    this.calendar$$.next(this.localeStorage.getData('calendar') || []);
+    this.weeks$$.next(this.localeStorage.getData('weeks') || []);
   }
 
-  calendar = this.calendar$$.getValue();
+  // weeks = this.weeks$$.getValue();
 
-  createDay(date: string, array: any[]) {
+  createDay(date: string, array: any[], weekId: number) {
     const newDay = {
       id: getMaxId(array),
-      date: date,
+      date,
       todos: [],
+      weekId,
     };
 
     // let updated = [...this.calendar$$.getValue(), newDay];
@@ -34,11 +38,17 @@ export class CalendarService {
     return newDay;
   }
 
-  createWeek() {
-    const calendar = this.calendar$$.getValue();
-    const lastWeekDays = calendar.length > 0 ? calendar[calendar.length - 1].days : [];
+  pickWeek(weekId: number) {
+    const currentWeek = this.weeks$$.getValue()
+      .find((week: Week) => week.id === weekId) || this.weeks$$.getValue()[0];
 
-    console.log(lastWeekDays);
+    this.localeStorage.saveData('week', currentWeek);
+    this.selectedWeek$$.next(currentWeek);
+  }
+
+  createWeek() {
+    const calendar = this.weeks$$.getValue();
+    const lastWeekDays = calendar.length > 0 ? calendar[calendar.length - 1].days : [];
 
     const currentDate: string = calendar.length > 0
       ? lastWeekDays[lastWeekDays.length - 1].date
@@ -54,12 +64,12 @@ export class CalendarService {
     startOfWeek.setDate(newDate.getDate() - newDate.getDay());
 
     const newDays: Day[] = [];
-    const newWeekId: number = getMaxId(this.calendar$$.getValue());
+    const newWeekId: number = getMaxId(this.weeks$$.getValue());
 
     for (let i = 0; i < 7; i++) {
       const formattedDay = formatDate(new Date(startOfWeek.setDate(startOfWeek.getDate() + 1)));
       
-      const newDay = this.createDay(formattedDay, newDays);
+      const newDay = this.createDay(formattedDay, newDays, newWeekId);
       newDays.push(newDay);
     };
 
@@ -70,12 +80,9 @@ export class CalendarService {
       days: newDays,
     }
 
-    console.log(newWeek);
-
-    this.calendar$$.next([...calendar, newWeek]);
-    this.localeStorage.saveData('calendar', [...calendar, newWeek]);
+    this.weeks$$.next([...calendar, newWeek]);
+    this.localeStorage.saveData('weeks', [...calendar, newWeek]);
   }
-  
   
   // createTodoByDate(date: string) {
   //   const copy = [...this.calendar$$.getValue()];

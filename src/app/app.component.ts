@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterContentChecked, Component } from '@angular/core';
 import { navigations } from './../helpers/variables';
 import { Nav } from './types/nav';
-import {NavigationEnd, Router } from '@angular/router';
-import { TodosService } from './services/todos.service';
-import { CalendarService } from './services/calendar.service';
+import {ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +11,7 @@ import { CalendarService } from './services/calendar.service';
 export class AppComponent {
   navs: Nav[] = navigations;
   href: string = '';
+  selectedDay: string = '';
 
   constructor(
     private router: Router,
@@ -20,6 +19,7 @@ export class AppComponent {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.href = event.url.split('/')[1];
+        this.selectedDay = event.url.split('/')[2];
       }
     });
   }
