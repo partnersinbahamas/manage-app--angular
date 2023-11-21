@@ -14,6 +14,7 @@ import { DayComponent } from './components/weeks/day/day.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeekComponent } from './components/weeks/week/week.component';
 import { MonthPipe } from './pipes/month.pipe';
+import { DetailsPageComponent } from './pages/details-page/details-page.component';
 
 const routes: Routes = [
   {
@@ -22,8 +23,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'details/:week/:day',
-    component:  TitleComponent,
+    path: 'details',
+    component:  DetailsPageComponent,
   },
 
   {
@@ -46,6 +47,7 @@ const routes: Routes = [
     DayComponent,
     WeekComponent,
     MonthPipe,
+    DetailsPageComponent,
   ],
   imports: [
     BrowserModule,

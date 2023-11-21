@@ -1,17 +1,20 @@
 
-import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { LocaleStorageServiceService } from 'src/app/services/locale-storage-service.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnInit
+} from '@angular/core';
 import { WeeksService } from 'src/app/services/weeks.service';
 import { Week } from 'src/app/types/week';
-import { formatDate, getMonth } from 'src/helpers/functions';
-import { MonthPipe } from 'src/app/pipes/month.pipe';
+import { formatDate } from 'src/helpers/functions';
 
 
 @Component({
   selector: 'app-days',
   templateUrl: './weeks.component.html',
   styleUrls: ['./weeks.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  // changeDetection: ChangeDetectionStrategy.Default,
 })
 export class WeeksComponent implements OnInit {
   weeks: Week[] = [];

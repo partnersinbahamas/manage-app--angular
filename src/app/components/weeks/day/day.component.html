@@ -1,13 +1,13 @@
-<li class="day" routerLink="{{router}}" #dayEl>
+<li class="day" #dayEl (click)="onDaySelect(day)" [class.day-active]="isSame">
   <button class="day__button">
     <div class="day__header">
-        <h1 class="day__title">{{ calendatDay }}</h1>
+        <h1 class="day__title">{{ calendarDay }}</h1>
   
         <div class="day__formats">
           <span class="day__format">
             {{month}}
           </span>
-  
+
           <span class="day__format">
             {{day.date}}
           </span>
@@ -15,7 +15,3 @@
       </div>
   </button>
 </li>
-
-  <!-- <ul class="day__list">
-    <app-todo *ngFor="let todo of day.todos;let i = index; trackBy: trackById" [todo]="todo"/>
-  </ul> -->

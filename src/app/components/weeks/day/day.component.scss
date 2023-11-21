@@ -1,9 +1,9 @@
 @import '../../../../styles/variables.scss';
 
 .day {
-  // width: 480px;
+  border: 1px solid transparent;
   &-active {
-    background-color: #000;
+    border-color: $color-blue--focus;
   }
   &__button {
     padding: 10px;
@@ -26,7 +26,7 @@
     }
   
     &:focus {
-      border-color: $color-blue--focus;
+      // border-color: $color-blue--focus;
     }
   }
 

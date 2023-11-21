@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocaleStorageServiceService } from './locale-storage-service.service';
-import { formatDate, getMaxId, getMonth, incrementDaysIds } from 'src/helpers/functions';
+import { formatDate, getMaxId } from 'src/helpers/functions';
 import { Day } from '../types/day';
 import { Week } from '../types/week';
 
@@ -10,18 +10,24 @@ import { Week } from '../types/week';
 })
 export class WeeksService {
   private weeks$$ = new BehaviorSubject<Week[]>([]);
-  private selectedWeek$$ =  new BehaviorSubject<any | null>(null);
+  private selectedWeek$$ =  new BehaviorSubject<Week | null>(null);
+  private currentWeek$$ = new BehaviorSubject<Week | null>(null);
 
   selectedWeek$ = this.selectedWeek$$.asObservable();
   weeks$ = this.weeks$$.asObservable();
+  currentWeek$ = this.currentWeek$$.asObservable();
 
   constructor(
     private localeStorage: LocaleStorageServiceService,
   ) {
     this.weeks$$.next(this.localeStorage.getData('weeks') || []);
-  }
 
-  // weeks = this.weeks$$.getValue();
+    this.currentWeek$$.next(
+      this.weeks$$.getValue().find((week: Week) => {
+        return week.days.find((day: Day) => day.date === formatDate(new Date()));
+      }) || null,
+    );
+  }
 
   createDay(date: string, array: any[], weekId: number) {
     const newDay = {
@@ -30,10 +36,6 @@ export class WeeksService {
       todos: [],
       weekId,
     };
-
-    // let updated = [...this.calendar$$.getValue(), newDay];
-    // this.calendar$$.next(updated);
-    // this.localeStorage.saveData('calendar', updated);
 
     return newDay;
   }

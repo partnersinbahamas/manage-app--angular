@@ -10,7 +10,7 @@ export const navigations: Nav[] = [
   {
     id: 2,
     title: 'Details',
-    path: 'details/1/1',
+    path: 'details',
     img: 'bx bx-color',
   },
 ];

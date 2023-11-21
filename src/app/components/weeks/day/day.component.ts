@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { WeeksService } from 'src/app/services/weeks.service';
+import { AfterContentChecked, ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { DayService } from 'src/app/services/day.service';
 import { Day } from 'src/app/types/day';
 import { Todo } from 'src/app/types/todo';
-import { formatRelativeDate, getCalendarDay, getMonth } from 'src/helpers/functions';
-import { months } from 'src/helpers/variables';
+import { getCalendarDay, getMonth } from 'src/helpers/functions';
 
 @Component({
   selector: 'app-day',
@@ -13,20 +13,40 @@ import { months } from 'src/helpers/variables';
 })
 export class DayComponent implements OnInit {
   @Input() day!: Day;
+  destroy$ = new Subject();
 
-  calendatDay: string = '';
+  calendarDay: string = '';
   month: string = '';
+  router: string = '';
 
-  router: string = ''
+  isSame = new BehaviorSubject<any>(null);
+
+  constructor(
+    private dayService: DayService,
+  ) {}
 
   ngOnInit(): void {
-    this.calendatDay = getCalendarDay(this.day.date);
+    this.calendarDay = getCalendarDay(this.day.date);
     this.month = getMonth(this.day.date);
 
-    this.router = `/details/${this.day.weekId}/${this.day.id}`
+    this.router = `/details/${this.day.weekId}/${this.day.id}`;
+
+    this.dayService.selectedDay$.subscribe((sd) => {
+      this.isSame.next(sd?.id === this.day.id);
+    })
   };
 
   trackById(i: number, todo: Todo) {
     return todo.id;
+  }
+
+  onDaySelect(day: Day | null) {
+    this.dayService.onDaySelect(day);
+  }
+
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }

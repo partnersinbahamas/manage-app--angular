@@ -1,5 +1,4 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { WeeksService } from 'src/app/services/weeks.service';
 import { Todo } from 'src/app/types/todo';
 
 @Component({
@@ -19,10 +18,6 @@ export class TodoComponent implements OnInit {
     }
   }
 
-  constructor(
-    private weeksService: WeeksService,
-  ) {}
-
   ngOnInit(): void {
     console.log(this.isEditing);
   }
@@ -34,13 +29,5 @@ export class TodoComponent implements OnInit {
 
   onSave() {
     this.isEditing = false;
-
-    console.log(this.title);
-
-    // this.calendarService
-    //   .updateTodoByDate(
-    //     formatDate(new Date()),
-    //     { ...this.todo, title: this.title} /// ?
-    //   );  // in develop phase
   }
 }

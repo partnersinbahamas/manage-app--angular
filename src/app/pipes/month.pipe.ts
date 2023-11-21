@@ -5,9 +5,7 @@ import { getMonth } from 'src/helpers/functions';
   name: 'month'
 })
 export class MonthPipe implements PipeTransform {
-
   transform(date: string): string {
     return getMonth(date);
   }
-
 }
