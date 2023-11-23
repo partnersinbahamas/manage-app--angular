@@ -1,6 +1,7 @@
 import { AfterContentChecked, ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { DayService } from 'src/app/services/day.service';
+import { WeeksService } from 'src/app/services/weeks.service';
 import { Day } from 'src/app/types/day';
 import { Todo } from 'src/app/types/todo';
 import { getCalendarDay, getMonth } from 'src/helpers/functions';
@@ -13,13 +14,18 @@ import { getCalendarDay, getMonth } from 'src/helpers/functions';
 })
 export class DayComponent implements OnInit {
   @Input() day!: Day;
+  @Input('selectedDay') set selectedDay(day: Day | null) {
+    this.isSelected = day?.id === this.day.id
+      && this.day.weekId === day.weekId;
+  };
+
   destroy$ = new Subject();
 
   calendarDay: string = '';
   month: string = '';
-  router: string = '';
 
-  isSame = new BehaviorSubject<any>(null);
+  isSelected = false;
+  isCurrent = false;
 
   constructor(
     private dayService: DayService,
@@ -29,10 +35,9 @@ export class DayComponent implements OnInit {
     this.calendarDay = getCalendarDay(this.day.date);
     this.month = getMonth(this.day.date);
 
-    this.router = `/details/${this.day.weekId}/${this.day.id}`;
-
-    this.dayService.selectedDay$.subscribe((sd) => {
-      this.isSame.next(sd?.id === this.day.id);
+    this.dayService.currentDay$.subscribe((currentDay) => {
+      this.isCurrent = currentDay?.id === this.day.id
+        && currentDay.weekId === this.day.weekId;
     })
   };
 
@@ -42,11 +47,5 @@ export class DayComponent implements OnInit {
 
   onDaySelect(day: Day | null) {
     this.dayService.onDaySelect(day);
-  }
-
-
-  ngOnDestroy(): void {
-    this.destroy$.next(null);
-    this.destroy$.complete();
   }
 }

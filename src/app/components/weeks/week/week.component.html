@@ -3,6 +3,9 @@
     <app-day
       *ngFor="let day of week.days; trackBy: trackById"
       [day]="day"
+      [selectedDay]="selectedDay"
     />
   </ul>
+
+  <div class="week-active" *ngIf="currentWeek?.id === week.id"></div>
 </div>

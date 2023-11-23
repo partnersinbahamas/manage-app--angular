@@ -10,7 +10,7 @@ import { WeeksService } from './services/weeks.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterContentChecked {
+export class AppComponent {
   navs: Nav[] = navigations;
   href: string = '';
 
@@ -23,9 +23,5 @@ export class AppComponent implements AfterContentChecked {
         this.href = event.url.split('/')[1];
       }
     });
-  }
-
-  ngAfterContentChecked(): void {
-    this.dayService.selectedDay$.subscribe(day => console.log(day))
   }
 }

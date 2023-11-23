@@ -1,5 +1,19 @@
+@import '../../../../styles/variables.scss';
+
 .week {
   width: 470px;
+  
+  &-active {
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    bottom: -3%;
+    width: 100%;
+    height: 7px;
+    border-radius: $border-radius;
+    background-color: rgba($color: $color-blue--focus, $alpha: .7);
+  }
 
   &__list {
     padding: 0;

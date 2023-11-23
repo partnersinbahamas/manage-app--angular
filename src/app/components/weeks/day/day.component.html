@@ -1,4 +1,9 @@
-<li class="day" #dayEl (click)="onDaySelect(day)" [class.day-active]="isSame">
+<li
+  #dayEl
+  class="day"
+  [class]="{'day-active': isSelected, 'day-current': isCurrent}"
+  (click)="onDaySelect(day)"
+>
   <button class="day__button">
     <div class="day__header">
         <h1 class="day__title">{{ calendarDay }}</h1>

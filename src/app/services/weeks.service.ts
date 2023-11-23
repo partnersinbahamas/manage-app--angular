@@ -44,7 +44,7 @@ export class WeeksService {
     const currentWeek = this.weeks$$.getValue()
       .find((week: Week) => week.id === weekId) || this.weeks$$.getValue()[0];
 
-    this.localeStorage.saveData('week', currentWeek);
+    // this.localeStorage.saveData('week', currentWeek);
     this.selectedWeek$$.next(currentWeek);
   }
 
