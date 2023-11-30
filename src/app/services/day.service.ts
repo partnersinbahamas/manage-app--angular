@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Day } from '../types/day';
-import { BehaviorSubject } from 'rxjs';
+import { Day } from '../Classes/Day';
+import { BehaviorSubject, delay, switchMap } from 'rxjs';
 import { WeeksService } from './weeks.service';
 import { formatDate } from 'src/helpers/functions';
 import { Router } from '@angular/router';
@@ -15,18 +15,22 @@ export class DayService implements OnInit {
   currentDay$ = this.currentDay$$.asObservable();
   selectedDay$ = this.selectedDay$$.asObservable();
 
+  // selectedDay = this.selectedDay$$.getValue();
+
   constructor(
     private weeksService: WeeksService,
     private router: Router,
   ) {
-    this.weeksService.currentWeek$.subscribe((currentWeek) => {
-      const findedDay = currentWeek?.days
-      .find((day) => day.date === formatDate(new Date()))
-      || null;
+  this.weeksService.currentWeek$.subscribe((currentWeek) => {
+    console.log(currentWeek);
+    const findedDay = currentWeek?.days
+    .find((day: Day) => day.date === formatDate(new Date()))
+    || null;
 
-      this.currentDay$$.next(findedDay);
-      this.selectedDay$$.next(findedDay);
-    });
+    this.currentDay$$.next(findedDay);
+    // this.dayService.onDaySelect(findedDay);
+    this.selectedDay$$.next(findedDay);
+  });
   }
 
   ngOnInit(): void {
@@ -36,7 +40,6 @@ export class DayService implements OnInit {
   onDaySelect(day: Day | null) {
     this.router.navigate([ day ? '/details' : '/about' ])
 
-    // console.log('day on click: ', day)
     this.selectedDay$$.next(day);
   }
 }

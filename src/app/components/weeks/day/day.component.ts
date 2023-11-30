@@ -1,8 +1,7 @@
-import { AfterContentChecked, ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { DayService } from 'src/app/services/day.service';
-import { WeeksService } from 'src/app/services/weeks.service';
-import { Day } from 'src/app/types/day';
+import { Day } from 'src/app/Classes/Day';
 import { Todo } from 'src/app/types/todo';
 import { getCalendarDay, getMonth } from 'src/helpers/functions';
 
@@ -12,7 +11,7 @@ import { getCalendarDay, getMonth } from 'src/helpers/functions';
   styleUrls: ['./day.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DayComponent implements OnInit {
+export class DayComponent implements OnInit, AfterViewInit {
   @Input() day!: Day;
   @Input('selectedDay') set selectedDay(day: Day | null) {
     this.isSelected = day?.id === this.day.id
@@ -22,14 +21,21 @@ export class DayComponent implements OnInit {
   destroy$ = new Subject();
 
   calendarDay: string = '';
+  sel: any = null;
   month: string = '';
 
-  isSelected = false;
-  isCurrent = false;
+  isSelected: boolean = false;
+  isCurrent: boolean = false;
 
   constructor(
     private dayService: DayService,
   ) {}
+
+  ngAfterViewInit(): void {
+    this.dayService.selectedDay$.subscribe((d) => {
+      this.sel = d;
+    })
+  }
 
   ngOnInit(): void {
     this.calendarDay = getCalendarDay(this.day.date);
@@ -38,14 +44,18 @@ export class DayComponent implements OnInit {
     this.dayService.currentDay$.subscribe((currentDay) => {
       this.isCurrent = currentDay?.id === this.day.id
         && currentDay.weekId === this.day.weekId;
-    })
+    });
   };
 
   trackById(i: number, todo: Todo) {
     return todo.id;
   }
 
-  onDaySelect(day: Day | null) {
-    this.dayService.onDaySelect(day);
+  onDaySelect(day: Day) {
+    if (this.isSelected) {
+      this.dayService.onDaySelect(null);
+    } else {
+      this.dayService.onDaySelect(day);
+    }
   }
 }

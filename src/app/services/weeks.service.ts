@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocaleStorageServiceService } from './locale-storage-service.service';
 import { formatDate, getMaxId } from 'src/helpers/functions';
-import { Day } from '../types/day';
-import { Week } from '../types/week';
+import { Day } from '../Classes/Day';
+import { Week } from '../Classes/Week';
+import { DayService } from './day.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,27 +18,30 @@ export class WeeksService {
   weeks$ = this.weeks$$.asObservable();
   currentWeek$ = this.currentWeek$$.asObservable();
 
+  dayService: DayService | null = null;
+
   constructor(
     private localeStorage: LocaleStorageServiceService,
+    // private dayService: DayService,
   ) {
     this.weeks$$.next(this.localeStorage.getData('weeks') || []);
 
+    if (!this.weeks$$.getValue().length) {
+      this.createWeek();
+    }
+
     this.currentWeek$$.next(
       this.weeks$$.getValue().find((week: Week) => {
+        console.log(week);
         return week.days.find((day: Day) => day.date === formatDate(new Date()));
       }) || null,
-    );
+    )
   }
 
   createDay(date: string, array: any[], weekId: number) {
-    const newDay = {
-      id: getMaxId(array),
-      date,
-      todos: [],
-      weekId,
-    };
-
-    return newDay;
+    const weeks = this.weeks$$.getValue();
+    const lastDay = weeks[weeks.length - 1]?.days[weeks[weeks.length - 1].days?.length - 1].id || 0
+    return new Day(date, getMaxId(array, lastDay), weekId);
   }
 
   pickWeek(weekId: number) {
@@ -46,6 +50,21 @@ export class WeeksService {
 
     // this.localeStorage.saveData('week', currentWeek);
     this.selectedWeek$$.next(currentWeek);
+  }
+
+  setDayService(dayService: DayService) {
+    this.dayService = dayService;
+
+    this.currentWeek$.subscribe((currentWeek) => {
+      console.log(currentWeek);
+      const findedDay = currentWeek?.days
+      .find((day) => day.date === formatDate(new Date()))
+      || null;
+  
+      // this.currentDay$$.next(findedDay);
+      this.dayService?.onDaySelect(findedDay);
+      // this.selectedDay$$.next(findedDay);
+    });
   }
 
   createWeek() {
@@ -75,12 +94,12 @@ export class WeeksService {
       newDays.push(newDay);
     };
 
-    const newWeek: Week = {
-      id: newWeekId,
-      startFrom: newDays[0].date,
-      endTo: newDays[newDays.length - 1].date,
-      days: newDays,
-    }
+    const newWeek = new Week(
+      newWeekId,
+      newDays[0].date, 
+      newDays[newDays.length - 1].date,
+      newDays,
+    )
 
     this.weeks$$.next([...calendar, newWeek]);
     this.localeStorage.saveData('weeks', [...calendar, newWeek]);

@@ -13,8 +13,8 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 import { DayService } from 'src/app/services/day.service';
 import { WeeksService } from 'src/app/services/weeks.service';
-import { Day } from 'src/app/types/day';
-import { Week } from 'src/app/types/week';
+import { Day } from 'src/app/Classes/Day';
+import { Week } from 'src/app/Classes/Week';
 
 @Component({
   selector: 'app-week',
@@ -32,7 +32,7 @@ export class WeekComponent implements OnInit, OnDestroy {
 
   constructor(
     private dayService: DayService,
-    private weekService: WeeksService,
+    private weeksService: WeeksService,
   ) {}
 
   @ViewChild('weekEl') set weekElement(ref: ElementRef) {
@@ -48,7 +48,7 @@ export class WeekComponent implements OnInit, OnDestroy {
       this.selectedDay = selectedDay;
     });
 
-    this.weekService.currentWeek$.pipe(
+    this.weeksService.currentWeek$.pipe(
       takeUntil(this.destroy$)
     ).subscribe((currentWeek) => {
       this.currentWeek = currentWeek;

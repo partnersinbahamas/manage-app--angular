@@ -4,13 +4,18 @@
   width: 100%;
   border: 1px solid transparent;
   border-radius: 10px;
+  transition: border-color .6s;
 
   &-active {
     border-color: $color-blue--focus;
   }
-  
+
   &-current {
-    border-color: #52FF28;
+    border-color: $color-green;
+  }
+
+  &-both {
+    border-color: orange;
   }
 
   &__button {

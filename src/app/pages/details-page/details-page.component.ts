@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Subject, takeUntil } from 'rxjs';
 import { DayService } from 'src/app/services/day.service';
 import { WeeksService } from 'src/app/services/weeks.service';
-import { Day } from 'src/app/types/day';
+import { Day } from 'src/app/Classes/Day';
 
 @Component({
   selector: 'app-details-page',

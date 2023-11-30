@@ -1,8 +1,8 @@
 import { daysOfWeek } from "./variables";
 import { months } from "./variables";
 
-export function getMaxId(array: any[]) {
-  let maxId = 0;
+export function getMaxId(array: any[], startIndex = 0) {
+  let maxId = startIndex;
 
   for (const item of array) {
     if (item.id > maxId) {

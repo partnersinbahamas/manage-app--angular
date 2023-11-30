@@ -5,8 +5,9 @@ import {
   ElementRef,
   OnInit
 } from '@angular/core';
+import { DayService } from 'src/app/services/day.service';
 import { WeeksService } from 'src/app/services/weeks.service';
-import { Week } from 'src/app/types/week';
+import { Week } from 'src/app/Classes/Week';
 import { formatDate } from 'src/helpers/functions';
 
 
@@ -25,6 +26,7 @@ export class WeeksComponent implements OnInit {
 
   constructor(
     private weeksService: WeeksService,
+    private dayService: DayService,
   ) {}
 
   trackById(i: number, week: Week) {
@@ -87,7 +89,7 @@ export class WeeksComponent implements OnInit {
         const currentDate: number = Number(formatDate(new Date()).split('.')[0]);
         const lastDate: number = Number(lastWeek.endTo?.split('.')[0]);
 
-        if (currentDate > lastDate) {
+        if (lastDate > currentDate) {
           this.onAdd();
         }
       }

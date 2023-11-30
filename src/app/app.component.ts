@@ -1,9 +1,7 @@
-import { AfterContentChecked, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { navigations } from './../helpers/variables';
 import { Nav } from './types/nav';
 import { NavigationEnd, Router } from '@angular/router';
-import { DayService } from './services/day.service';
-import { WeeksService } from './services/weeks.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +14,6 @@ export class AppComponent {
 
   constructor(
     private router: Router,
-    private dayService: DayService,
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
