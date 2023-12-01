@@ -10,12 +10,12 @@
     border-color: $color-blue--focus;
   }
 
-  &-current {
-    border-color: $color-green;
-  }
-
   &-both {
     border-color: orange;
+  }
+
+  &-current {
+    border-color: $color-green;
   }
 
   &__button {

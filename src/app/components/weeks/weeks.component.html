@@ -43,6 +43,8 @@
     <app-week
       *ngFor="let week of weeks; trackBy: trackById"
       [week]="week"
+      [selectedDay]="selectedDay"
+      [currentDay]="currentDay"
       (onDayInit)="onDayElementInit($event)"
     />
   </ul>

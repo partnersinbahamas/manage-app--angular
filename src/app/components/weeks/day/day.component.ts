@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DayService } from 'src/app/services/day.service';
 import { Day } from 'src/app/Classes/Day';
@@ -11,17 +11,18 @@ import { getCalendarDay, getMonth } from 'src/helpers/functions';
   styleUrls: ['./day.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DayComponent implements OnInit, AfterViewInit {
+export class DayComponent implements OnInit {
   @Input() day!: Day;
+
   @Input('selectedDay') set selectedDay(day: Day | null) {
-    this.isSelected = day?.id === this.day.id
-      && this.day.weekId === day.weekId;
+    this.isSelected = day?.id === this.day.id && day?.weekId === this.day.weekId
   };
 
-  destroy$ = new Subject();
+  @Input('currentDay') set currentDay(day: Day | null) {
+    this.isCurrent = day?.id === this.day.id && day.weekId === this.day.weekId;
+  }
 
   calendarDay: string = '';
-  sel: any = null;
   month: string = '';
 
   isSelected: boolean = false;
@@ -31,20 +32,9 @@ export class DayComponent implements OnInit, AfterViewInit {
     private dayService: DayService,
   ) {}
 
-  ngAfterViewInit(): void {
-    this.dayService.selectedDay$.subscribe((d) => {
-      this.sel = d;
-    })
-  }
-
   ngOnInit(): void {
     this.calendarDay = getCalendarDay(this.day.date);
     this.month = getMonth(this.day.date);
-
-    this.dayService.currentDay$.subscribe((currentDay) => {
-      this.isCurrent = currentDay?.id === this.day.id
-        && currentDay.weekId === this.day.weekId;
-    });
   };
 
   trackById(i: number, todo: Todo) {

@@ -20,18 +20,18 @@ import { Week } from 'src/app/Classes/Week';
   selector: 'app-week',
   templateUrl: './week.component.html',
   styleUrls: ['./week.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WeekComponent implements OnInit, OnDestroy {
   @Input() week!: Week;
+  @Input() selectedDay!: Day | null;
+  @Input() currentDay!: Day | null;
   @Output() onDayInit = new EventEmitter();
-  destroy$ = new Subject();
 
-  selectedDay: Day | null = null;
+  destroy$ = new Subject();
   currentWeek: Week | null = null;
 
   constructor(
-    private dayService: DayService,
     private weeksService: WeeksService,
   ) {}
 
@@ -42,12 +42,6 @@ export class WeekComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.dayService.selectedDay$.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe((selectedDay) => {
-      this.selectedDay = selectedDay;
-    });
-
     this.weeksService.currentWeek$.pipe(
       takeUntil(this.destroy$)
     ).subscribe((currentWeek) => {

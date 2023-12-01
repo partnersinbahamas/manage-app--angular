@@ -13,6 +13,16 @@ export function getMaxId(array: any[], startIndex = 0) {
   return maxId + 1;
 }
 
+export function compareDates(date1: string, date2: string) {
+  const parts1 = date1.split('.').map(Number);
+  const parts2 = date2.split('.').map(Number);
+
+  const d1 = new Date(parts1[2], parts1[1] - 1, parts1[0]);
+  const d2 = new Date(parts2[2], parts2[1] - 1, parts2[0]);
+
+  return d1 > d2;
+}
+
 
 export function incrementDaysIds(array: any[]) {
   let maxId = 0;
