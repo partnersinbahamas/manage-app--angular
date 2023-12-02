@@ -17,6 +17,7 @@
     box-sizing: border-box;
     height: 100%;
     padding: 20px;
+    margin: 0 auto;
 
     display: flex;
     align-items: flex-start;
@@ -29,6 +30,12 @@
       width: 100%;
       margin-top: 100px;
       padding: 10px 80px;
+    }
+
+    @each $width in $screenWidths {
+      @media (min-width: #{$width}px) and (max-width: 1280px) {
+        width: #{$width}px;
+      }
     }
   }
 
@@ -58,8 +65,7 @@
 
     @include desktop() {
       width: 50%;
-    height: calc(100vh - 164px);
-
+      height: calc(100vh - 164px);
     }
   }
 
@@ -79,16 +85,23 @@
   &__nav {
     z-index: 1;
     background-color: $color-grey--light;
-    padding: 30px 80px;
-    border-radius: 20px;
+    padding: 20px 40px;
+    border-radius: 10px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
 
+    @include tablet() {
+      border-radius: 20px;
+
+      padding: 25px 120px;
+    }
+
     @include desktop() {
       border-radius: 20px 20px 0 0;
+      padding: 30px 80px;
     }
   }
 }

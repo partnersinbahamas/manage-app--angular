@@ -1,6 +1,16 @@
+@import '../../../styles/mixins.scss';
+
 .nav {
+  font-size: 12px;
   text-decoration: none;
   position: relative;
+
+  @include tablet() {
+    font-size: 14px;
+  }
+  @include desktop() {
+    font-size: 16px;
+  }
 
   &__shell {
     display: flex;
@@ -18,7 +28,15 @@
       background-color: #fff;
 
       position: absolute;
-      bottom: -30px;
+      bottom: -18px;
+
+      @include tablet() {
+        bottom: -24px;
+      }
+
+      @include desktop() {
+        bottom: -30px;
+      }
     }
   }
 

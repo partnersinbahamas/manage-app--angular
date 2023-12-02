@@ -1,7 +1,14 @@
 @import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
 
 .detailsPage {
   background-color: $color-grey--light;
   height: 100%;
+  width: 100%;
+  border-radius: 10px;
+
+  @include tablet() {
   border-radius: $border-radius;
+
+  }
 }

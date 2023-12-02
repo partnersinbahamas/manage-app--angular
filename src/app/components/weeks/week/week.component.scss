@@ -1,7 +1,18 @@
 @import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
 
 .week {
-  width: 470px;
+  width: 220px;
+
+  @each $width in $screenWidths {
+    @media (min-width: #{$width}px) and (max-width: 1280px) {
+      width: #{$width - 80}px;
+    }
+  }
+
+  @include desktop() {
+    width: 470px; 
+  }
 
   &-active {
     display: flex;

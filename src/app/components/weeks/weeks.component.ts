@@ -4,7 +4,8 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import { DayService } from 'src/app/services/day.service';
 import { WeeksService } from 'src/app/services/weeks.service';
@@ -16,7 +17,7 @@ import { compareDates } from 'src/helpers/functions';
 
 
 @Component({
-  selector: 'app-days',
+  selector: 'app-weeks',
   templateUrl: './weeks.component.html',
   styleUrls: ['./weeks.component.scss'],
   // changeDetection: ChangeDetectionStrategy.Default,
@@ -26,7 +27,7 @@ export class WeeksComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject();
 
-  dayWidth: number = 0;
+  weekWidth: number = 0;
   weeksShift: number = 0;
 
   selectedWeek: Week | null = null;
@@ -43,19 +44,19 @@ export class WeeksComponent implements OnInit, OnDestroy {
   }
 
   onDayElementInit(ref: ElementRef): void {
-    this.dayWidth = ref.nativeElement.clientWidth;
+    this.weekWidth = ref.nativeElement.clientWidth;
     const index = this.selectedWeek?.id! - 1;
 
     const max = (
-      (this.weeks.length - 1) * this.dayWidth) + (
+      (this.weeks.length - 1) * this.weekWidth) + (
         this.weeks.length - 1
       ) * 30;
 
-    this.weeksShift = Math.max(-((this.dayWidth * index) + (index * 30)), -max);
+    this.weeksShift = Math.max(-((this.weekWidth * index) + (index * 30)), -max);
   }
 
   onWeekUnShift() {
-    const shift =  Math.min(this.weeksShift + (this.dayWidth + 30), 0);
+    const shift =  Math.min(this.weeksShift + (this.weekWidth + 30), 0);
     this.weeksShift = shift;
 
     this.weeksService.pickWeek(
@@ -64,9 +65,9 @@ export class WeeksComponent implements OnInit, OnDestroy {
   }
 
   onWeekShift() {
-    const max = ((this.weeks.length - 1) * this.dayWidth) + (this.weeks.length - 1) * 30;
+    const max = ((this.weeks.length - 1) * this.weekWidth) + (this.weeks.length - 1) * 30;
 
-    const shift = Math.max(this.weeksShift - (this.dayWidth + 30), -max)
+    const shift = Math.max(this.weeksShift - (this.weekWidth + 30), -max)
     this.weeksShift = shift;
 
     this.weeksService.pickWeek(

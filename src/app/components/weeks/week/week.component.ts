@@ -1,13 +1,16 @@
 import {
   AfterContentChecked,
+  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
@@ -26,6 +29,7 @@ export class WeekComponent implements OnInit, OnDestroy {
   @Input() week!: Week;
   @Input() selectedDay!: Day | null;
   @Input() currentDay!: Day | null;
+
   @Output() onDayInit = new EventEmitter();
 
   destroy$ = new Subject();
