@@ -68,116 +68,99 @@ export class WeeksService {
   // }
 
 
-  // createWeek() {
-  //   const calendar = this.weeks$$.getValue();
-  //   const currentDate = calendar.length > 0
-  //   ? calendar[calendar.length - 1].days[6].date // Get the last day of the last week
-  //   : '03.12.2023'// If there are no weeks, start from a specific date
-    
-  //   console.log('Current Date:', currentDate);
-    
-  //   const preparedDate = currentDate.split('.').reverse().join('-');
-  //   const newDate = new Date(preparedDate);
-    
-  //   console.log('New Date:', newDate);
-    
-  //   const startOfWeek = new Date(newDate);
-    
-  //   // Calculate the start of the week from the previous Monday
-  //   // const daysSinceMonday = (newDate.getDay() + 6) % 7; // Get the days passed from Monday
-  //   // startOfWeek.setDate(newDate.getDate() - daysSinceMonday);
-
-
-  //   if (newDate.getDay() === 0) {
-  //     startOfWeek.setDate(newDate.getDate() - (newDate.getDay() + 6));
-
-  //   } else {
-  //   startOfWeek.setDate(newDate.getDate() - newDate.getDay());
-
-  //   }
-
-
-
-    
-  //   console.log('Start of Week:', startOfWeek);
-    
-  //   const newDays = [];
-  //   const newWeekId = getMaxId(this.weeks$$.getValue());
-
-  //   let indexDay = 0;
-    
-  //   for (let i = 0; i < 7; i++) {
-    
-  //   const formattedDay = formatDate(new Date(startOfWeek.setDate(startOfWeek.getDate() + 1)));
-  //   indexDay++;
-    
-  //   console.log('Formatted Day:', formattedDay);
-
-  //   const b = formattedDay.split('.').reverse().join('-');
-  //   const c = new Date(b);
-  //   const v = formatDate(new Date(c.setDate(c.getDay() - 1)))
-  //   console.log('v', v);
-  //   console.log('Formatted Day:', v);
-    
-  //   const newDay = this.createDay(v, newDays, newWeekId);
-  //   newDays.push(newDay);
-    
-    
-  //   }
-    
-  //   const newWeek = new Week(
-  //   newWeekId,
-  //   newDays[0].date,
-  //   newDays[newDays.length - 1].date,
-  //   newDays,
-  //   );
-    
-  //   // Update state and save to localStorage
-  //   this.weeks$$.next([...calendar, newWeek]);
-  //   this.localeStorage.saveData('weeks', [...calendar, newWeek]);
-  //   }
-  
-  
-  
-
   createWeek() {
     const calendar = this.weeks$$.getValue();
-    const lastWeekDays = calendar.length > 0 ? calendar[calendar.length - 1].days : [];
 
-    const currentDate: string = calendar.length > 0
-      ? lastWeekDays[lastWeekDays.length - 1].date
-      : formatDate(new Date());
-  
-    const preparedDate: string = currentDate.split('.').reverse().join('-');
-    const newDate: Date = new Date(preparedDate);
+    console.log(calendar);
 
-    // const nextDay: Date = new Date(newDate);
-    // nextDay.setDate(newDate.getDate() + 1);
 
-    const startOfWeek: Date = new Date(newDate);
+    const lastWeekDays =
+      calendar.length > 0 ? calendar[calendar.length - 1].days : [];
 
-    startOfWeek.setDate(newDate.getDate() - newDate.getDay()); // old V
+    let currentDate: Date;
+
+    if (calendar.length > 0) {
+      const testDate = new Date(lastWeekDays[lastWeekDays.length - 1].date.split('.').reverse().join('-'))
+      testDate.setDate(testDate.getDate() + 1)
+      currentDate = testDate
+    } else {
+      currentDate = new Date();
+    }
+
+    console.log(currentDate);
+
+
+    let startOfWeek = new Date(currentDate);
+    startOfWeek.setDate(new Date(currentDate).getDate() - (new Date(currentDate).getDay() - (new Date(currentDate).getDay() === 0 ? -6 : 1)));
+
+    console.log(startOfWeek);
+
 
     const newDays: Day[] = [];
     const newWeekId: number = getMaxId(this.weeks$$.getValue());
 
     for (let i = 0; i < 7; i++) {
-      const formattedDay = formatDate(new Date(startOfWeek.setDate(startOfWeek.getDate() + 1)));
-      
+      const formattedDay = formatDate(
+        new Date(startOfWeek.setDate(startOfWeek.getDate() + (i === 0 ? 0 : 1)))
+      );
+
       const newDay = this.createDay(formattedDay, newDays, newWeekId);
       newDays.push(newDay);
-    };
+    }
+
+    console.log(newDays);
+
 
     const newWeek = new Week(
       newWeekId,
-      newDays[0].date, 
+      newDays[0].date,
       newDays[newDays.length - 1].date,
-      newDays,
-    )
+      newDays
+    );
+
 
     this.weeks$$.next([...calendar, newWeek]);
     this.localeStorage.saveData('weeks', [...calendar, newWeek]);
   }
+  
+  // createWeek() {
+  //   const calendar = this.weeks$$.getValue();
+  //   const lastWeekDays = calendar.length > 0 ? calendar[calendar.length - 1].days : [];
+
+  //   const currentDate: string = calendar.length > 0
+  //     ? lastWeekDays[lastWeekDays.length - 1].date
+  //     : formatDate(new Date());
+  
+  //   const preparedDate: string = currentDate.split('.').reverse().join('-');
+  //   const newDate: Date = new Date(preparedDate);
+
+  //   // const nextDay: Date = new Date(newDate);
+  //   // nextDay.setDate(newDate.getDate() + 1);
+
+  //   const startOfWeek: Date = new Date(newDate);
+
+  //   startOfWeek.setDate(newDate.getDate() - newDate.getDay()); // old V
+
+  //   const newDays: Day[] = [];
+  //   const newWeekId: number = getMaxId(this.weeks$$.getValue());
+
+  //   for (let i = 0; i < 7; i++) {
+  //     const formattedDay = formatDate(new Date(startOfWeek.setDate(startOfWeek.getDate() + 1)));
+      
+  //     const newDay = this.createDay(formattedDay, newDays, newWeekId);
+  //     newDays.push(newDay);
+  //   };
+
+  //   const newWeek = new Week(
+  //     newWeekId,
+  //     newDays[0].date, 
+  //     newDays[newDays.length - 1].date,
+  //     newDays,
+  //   )
+
+  //   this.weeks$$.next([...calendar, newWeek]);
+  //   this.localeStorage.saveData('weeks', [...calendar, newWeek]);
+  // }
 
   // createTodoByDate(date: string) {
   //   const copy = [...this.calendar$$.getValue()];
