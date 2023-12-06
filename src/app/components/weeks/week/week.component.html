@@ -1,4 +1,6 @@
 <div class="week" #weekEl>
+  <div class="week-active" *ngIf="currentWeek?.id === week.id"></div>
+
   <ul class="week__list">
     <app-day
       *ngFor="let day of week.days; trackBy: trackById"
@@ -7,6 +9,4 @@
       [currentDay]="currentDay"
     />
   </ul>
-
-  <div class="week-active" *ngIf="currentWeek?.id === week.id"></div>
 </div>

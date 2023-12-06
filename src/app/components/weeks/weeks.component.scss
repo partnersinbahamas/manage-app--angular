@@ -9,6 +9,7 @@
   background-color: $color-grey--light;
   width: 100%;
   height: 580px;
+  position: relative;
 
   @include tablet() {
     height: 650px;
@@ -16,6 +17,7 @@
   }
 
   @include desktop() {
+    width: 510px;
     position: absolute;
     bottom: 0;
     height: 100%;
@@ -64,18 +66,37 @@
   }
 
 
-  &__buttons {
+  &__footer {
+    width: 100%;
+    position: absolute;
+    bottom: -25px; //15
+    left: 0;
     display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__buttons {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-add {
+      position: relative;
+      bottom: -28px;
+      transition: 1s;
+
+      &--rotate {
+        transform: rotate(180deg);
+      }
+    }
   }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
     gap: 5px;
-
-    // @include tablet() {
-    //   gap: 5px;
-    // }
   }
 
   &__months {

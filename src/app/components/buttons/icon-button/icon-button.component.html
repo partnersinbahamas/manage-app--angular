@@ -1,7 +1,9 @@
 <button
   type="button"
   class="iconButton"
+  [disabled]="isDisabled"
   (click)="action.emit()"
+  (dblclick)="doubleClick.emit()"
 >
-  <icon [img]="img"></icon>
+  <icon [img]="img" [isDisabled]="isDisabled"></icon>
 </button>

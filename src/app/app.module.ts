@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WeekComponent } from './components/weeks/week/week.component';
 import { MonthPipe } from './pipes/month.pipe';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
+import { CircleButtonComponent } from './components/buttons/circle-button/circle-button.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
     WeekComponent,
     MonthPipe,
     DetailsPageComponent,
+    CircleButtonComponent,
   ],
   imports: [
     BrowserModule,

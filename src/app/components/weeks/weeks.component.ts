@@ -1,10 +1,15 @@
 
 import {
+  AfterContentChecked,
+  AfterViewChecked,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Input,
+  OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { DayService } from 'src/app/services/day.service';
@@ -22,8 +27,10 @@ import { compareDates } from 'src/helpers/functions';
   styleUrls: ['./weeks.component.scss'],
   // changeDetection: ChangeDetectionStrategy.Default,
 })
-export class WeeksComponent implements OnInit, OnDestroy {
-  weeks: Week[] = [];
+export class WeeksComponent implements OnInit, OnDestroy, OnChanges, AfterContentChecked {
+  // weeks: Week[] = [];
+
+  @Input() weeks!: Week[];
 
   destroy$ = new Subject();
 
@@ -34,10 +41,42 @@ export class WeeksComponent implements OnInit, OnDestroy {
   selectedDay: Day | null = null;
   currentDay: Day | null = null;
 
+  isSuccessAdded: boolean = false;
+
+  _max: number = 0;
+
+  set max(value: any) {
+    this._max = ((this.weeks.length - 1) * this.weekWidth) + (this.weeks.length - 1) * 30;
+  }
+
+  get max() {
+    return -this._max;
+  }
+
+  isMax: boolean = false;
+  isMin: boolean = false;
+
   constructor(
     private weeksService: WeeksService,
     private dayService: DayService,
   ) {}
+  ngAfterContentChecked(): void {
+    console.log('max', this.isMax);
+    console.log('min', this.isMin);
+  }
+
+  ngOnChanges({weeks}: SimpleChanges): void {
+    if (weeks.previousValue !== weeks.currentValue) {
+      this.arrowLimitReBuild();
+    }
+  }
+
+  arrowLimitReBuild() {
+    this.max = null;
+
+    this.isMax = this.weeksShift <= this.max;
+    this.isMin = this.weeksShift === 0;
+  }
 
   trackById(i: number, week: Week) {
     return week.id;
@@ -47,45 +86,69 @@ export class WeeksComponent implements OnInit, OnDestroy {
     this.weekWidth = ref.nativeElement.clientWidth;
     const index = this.selectedWeek?.id! - 1;
 
-    const max = (
-      (this.weeks.length - 1) * this.weekWidth) + (
-        this.weeks.length - 1
-      ) * 30;
+    this.arrowLimitReBuild();
 
-    this.weeksShift = Math.max(-((this.weekWidth * index) + (index * 30)), -max);
+    this.weeksShift = Math.max(-((this.weekWidth * index) + (index * 30)), this.max);
   }
 
   onWeekUnShift() {
-    const shift =  Math.min(this.weeksShift + (this.weekWidth + 30), 0);
-    this.weeksShift = shift;
-
-    this.weeksService.pickWeek(
-      Math.max(this.selectedWeek?.id! - 1, 1)
+    if (!this.isMin) {
+      const shift =  Math.min(this.weeksShift + (this.weekWidth + 30), 0);
+      this.weeksShift = shift;
+  
+        this.arrowLimitReBuild();
+  
+      this.weeksService.pickWeek(
+        Math.max(this.selectedWeek?.id! - 1, 1)
       );
+    }
   }
 
   onWeekShift() {
-    const max = ((this.weeks.length - 1) * this.weekWidth) + (this.weeks.length - 1) * 30;
+    if (!this.isMax) {
+      this.max = null;
 
-    const shift = Math.max(this.weeksShift - (this.weekWidth + 30), -max)
-    this.weeksShift = shift;
+      const shift = Math.max(this.weeksShift - (this.weekWidth + 30), this.max)
+      this.weeksShift = shift;
+  
+      this.isMax = this.weeksShift <= this.max;
+      this.isMin = this.weeksShift === 0;
+  
+      this.weeksService.pickWeek(
+        Math.min(this.selectedWeek?.id! + 1,
+          this.weeks[this.weeks.length - 1].id,
+        ),
+      );
+    }
+  }
 
-    this.weeksService.pickWeek(
-      Math.min(this.selectedWeek?.id! + 1,
-        this.weeks[this.weeks.length - 1].id,
-      ),
-    );
+    onWeekUnShiftMin() {
+    this.weeksShift = 0;
+    this.weeksService.pickWeek(this.weeks[0].id);
+    this.arrowLimitReBuild();
+  }
+
+  onWeekShiftMax() {
+    this.weeksShift = this.max;
+    this.weeksService.pickWeek(this.weeks[this.weeks.length - 1].id);
+    this.arrowLimitReBuild();
   }
 
   onAdd() {
     this.weeksService.createWeek();
+
+    this.isSuccessAdded = true;
+
+    setTimeout(() => {
+      this.isSuccessAdded = false;
+    }, 2000)
   };
 
   ngOnInit(): void {
-    this.weeksService.weeks$.pipe(takeUntil(this.destroy$))
-      .subscribe(weeks => {
-        this.weeks = weeks
-      });
+    // this.weeksService.weeks$.pipe(takeUntil(this.destroy$))
+    //   .subscribe(weeks => {
+    //     this.weeks = weeks
+    //   });
 
     this.weeksService.selectedWeek$.pipe(takeUntil(this.destroy$))
       .subscribe((selectedWeek) => {

@@ -1,0 +1,52 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+.circleButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  box-shadow: $shadow;
+
+  background-color: transparent;
+  transition: .3s;
+  border: 0;
+
+  &:active {
+    transform: scale(.8);
+  }
+
+  &:hover {
+    box-shadow: $shadow-hover;
+  }
+
+  &__icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+
+    @include desktop() {
+      gap: 20px;
+    }
+  }
+
+  &__success {
+    width: 23px;
+    height: 23px;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    background-image: url('../../../../images/success-icon.png');
+    transform: rotate(180deg);
+
+    // @include tablet() {
+    //   width: 25px;
+    //   height: 25px;
+    // }
+
+    @include desktop() {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

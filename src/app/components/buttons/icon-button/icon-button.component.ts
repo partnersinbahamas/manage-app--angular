@@ -14,5 +14,8 @@ import {
 })
 export class IconButtonComponent {
   @Output() action = new EventEmitter();
+  @Output() doubleClick = new EventEmitter();
+
   @Input() img!: string;
+  @Input() isDisabled!: boolean;
 }

@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class IconComponent {
   @Input() img!: string;
+  @Input() isDisabled!: boolean;
 }

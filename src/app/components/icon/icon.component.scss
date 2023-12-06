@@ -1,10 +1,16 @@
 @import '../../../styles/mixins.scss';
 
 .icon {
-  font-size: 16px;
+  font-size: 20px;
+  transition: .3s;
+
+  &-disabled {
+    color: rgba($color: #fff, $alpha: .2);
+    transform: scale(.9);
+  }
 
   @include tablet() {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   @include tablet() {

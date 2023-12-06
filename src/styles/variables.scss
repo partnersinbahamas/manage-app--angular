@@ -9,4 +9,11 @@ $color-grey-shrift-light: #7B7B7B;
 $color-green: #52FF28;
 
 $border-radius: 20px;
-$screenWidths: 300 400 480 600 700 800 900;
+$screenWidths: 300 350 400 480 600 700 800 900;
+
+$shadow: 0px -2px 15px rgba($color: #000, $alpha: .1),
+0px 2px 15px rgba($color: #000, $alpha: .1);
+
+$shadow-hover: 0px -2px 15px rgba($color: #000, $alpha: .2),
+0px 2px 15px rgba($color: #000, $alpha: .2);
+

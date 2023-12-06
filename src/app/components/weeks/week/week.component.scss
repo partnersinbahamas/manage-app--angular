@@ -19,11 +19,12 @@
     justify-content: center;
 
     position: absolute;
-    bottom: -3%;
+    // top: 2px;
+    bottom: -8px;
     width: 100%;
-    height: 4px;
+    height: 2px;
     border-radius: $border-radius;
-    background-color: rgba($color: $color-green, $alpha: .4);
+    background-color: rgba($color: $color-blue--focus, $alpha: .4);
   }
 
   &__list {

@@ -24,14 +24,20 @@
       </div>
     </article>
 
-
-    <div class="weeks__buttons">
-      <app-icon-button (action)="onAdd()" [img]="'bx bxs-folder-plus'"/>
-  
-      <div>
-        <app-icon-button (action)="onWeekUnShift()" [img]="'bx bxs-left-arrow'"/>
-        <app-icon-button (action)="onWeekShift()" [img]="'bx bxs-right-arrow'"/>
-      </div>
+    <div class="weeks__arrows">
+      <app-icon-button
+        (action)="onWeekUnShift()"
+        (doubleClick)="onWeekUnShiftMin()"
+        [img]="'bx bxs-left-arrow'"
+        [isDisabled]="isMin"
+      />
+      
+      <app-icon-button
+        (action)="onWeekShift()"
+        (doubleClick)="onWeekShiftMax()"
+        [img]="'bx bxs-right-arrow'"
+        [isDisabled]="isMax"
+      />
     </div>
   </div>
 
@@ -48,4 +54,16 @@
       (onDayInit)="onDayElementInit($event)"
     />
   </ul>
+
+  <div class="weeks__footer">
+    <div
+      class="weeks__buttons-add"
+      [class.weeks__buttons-add--rotate]="isSuccessAdded"
+    >
+      <app-circle-button
+        (action)="onAdd()"
+        [img]="'bx bxs-folder-plus'"
+      />
+    </div>
+  </div>
 </section>

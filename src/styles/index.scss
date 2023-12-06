@@ -20,3 +20,14 @@ body {
     overflow: hidden;
   }
 }
+
+button {
+  cursor: pointer;
+  // background-color: transparent;
+  // transition: .3s;
+  // border: 0;
+
+  // &:active {
+  //   transform: scale(.8);
+  // }
+}
