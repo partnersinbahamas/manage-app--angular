@@ -10,17 +10,17 @@
       </div>
 
       <div class="weeks__months">
-          <p class="weeks__month">{{selectedWeek?.startFrom! | month}}</p>
+        <p class="weeks__month">{{selectedWeek?.startFrom! | month}}</p>
 
-          <ng-container
-            *ngIf="
-              (selectedWeek?.startFrom! | month) !== (selectedWeek?.endTo! | month)
-            "
-          >
+        <ng-container
+          *ngIf="
+            (selectedWeek?.startFrom! | month) !== (selectedWeek?.endTo! | month)
+          "
+        >
           <span class="weeks__slash">-</span>
           <p class="weeks__month">{{selectedWeek?.endTo! | month}}</p>
 
-          </ng-container>
+        </ng-container>
       </div>
     </article>
 
@@ -30,6 +30,12 @@
         (doubleClick)="onWeekUnShiftMin()"
         [img]="'bx bxs-left-arrow'"
         [isDisabled]="isMin"
+      />
+
+      <app-icon-button
+        (action)="backToCurrent()"
+        [img]="'bx bxs-pointer'"
+        [isDisabled]="isCurrent"
       />
       
       <app-icon-button
@@ -45,7 +51,6 @@
     class="weeks__list"
     [ngStyle]="{ 'transform': 'translateX(' + weeksShift + 'px)' }"
   >
-
     <app-week
       *ngFor="let week of weeks; trackBy: trackById"
       [week]="week"
@@ -62,6 +67,7 @@
     >
       <app-circle-button
         (action)="onAdd()"
+        [isSuccess]="isSuccessAdded"
         [img]="'bx bxs-folder-plus'"
       />
     </div>

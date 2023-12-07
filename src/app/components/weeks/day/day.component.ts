@@ -1,5 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { DayService } from 'src/app/services/day.service';
 import { Day } from 'src/app/Classes/Day';
 import { Todo } from 'src/app/types/todo';
@@ -15,11 +14,13 @@ export class DayComponent implements OnInit {
   @Input() day!: Day;
 
   @Input('selectedDay') set selectedDay(day: Day | null) {
-    this.isSelected = day?.id === this.day.id && day?.weekId === this.day.weekId
+    this.isSelected = day?.id === this.day.id
+      && day?.weekId === this.day.weekId
   };
 
   @Input('currentDay') set currentDay(day: Day | null) {
-    this.isCurrent = day?.id === this.day.id && day.weekId === this.day.weekId;
+    this.isCurrent = day?.id === this.day.id
+      && day.weekId === this.day.weekId;
   }
 
   calendarDay: string = '';
@@ -48,4 +49,4 @@ export class DayComponent implements OnInit {
       this.dayService.onDaySelect(day);
     }
   }
-}
+};

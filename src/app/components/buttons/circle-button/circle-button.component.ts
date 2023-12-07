@@ -7,5 +7,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class CircleButtonComponent {
   @Output() action = new EventEmitter();
+  @Input() isSuccess!: boolean;
   @Input() img!: string;
+
+  isMove: boolean = true;
+
+  onEmit() {
+    this.action.emit();
+    this.isMove = true;
+
+    setTimeout(() => {
+      this.isMove = false;
+    }, 3000)
+  }
 }

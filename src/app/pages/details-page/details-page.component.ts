@@ -1,38 +1,20 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { DayService } from 'src/app/services/day.service';
-import { WeeksService } from 'src/app/services/weeks.service';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Day } from 'src/app/Classes/Day';
 
 @Component({
   selector: 'app-details-page',
   templateUrl: './details-page.component.html',
   styleUrls: ['./details-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailsPageComponent implements OnInit, OnDestroy{
+export class DetailsPageComponent implements OnDestroy {
+  @Input() selectedDay!: null | Day; 
   destroy$$ = new Subject();
 
   day: Day | null = null;
 
-  constructor(
-    private dayService: DayService,
-  ) {}
-
-  ngOnInit(): void {
-    this.dayService.selectedDay$.pipe(
-      takeUntil(this.destroy$$),
-    ).subscribe((selectedDay) => {
-      if (!selectedDay) {
-        this.dayService.currentDay$.pipe(
-          takeUntil(this.destroy$$)
-        ).subscribe((currentDay) => {
-          this.day = currentDay;
-        })
-      } else {
-        this.day = selectedDay;
-      }
-    })
-  }
+  constructor() {}
 
   ngOnDestroy(): void {
     this.destroy$$.next(null);

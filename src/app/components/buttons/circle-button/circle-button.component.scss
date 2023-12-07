@@ -30,19 +30,19 @@
     }
   }
 
+  &__container {
+    width: 23px;
+    height: 23px;
+  }
+
   &__success {
     width: 23px;
     height: 23px;
     background-repeat: no-repeat;
     background-size: contain;
 
-    background-image: url('../../../../images/success-icon.png');
+    background-image: url('../../../../images/success-gif.gif');
     transform: rotate(180deg);
-
-    // @include tablet() {
-    //   width: 25px;
-    //   height: 25px;
-    // }
 
     @include desktop() {
       width: 28px;

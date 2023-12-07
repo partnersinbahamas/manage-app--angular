@@ -23,7 +23,6 @@ export function compareDates(date1: string, date2: string) {
   return d1 > d2;
 }
 
-
 export function incrementDaysIds(array: any[]) {
   let maxId = 0;
 
@@ -50,7 +49,7 @@ export function formatRelativeDate(inputDate: string): string {
   const currentDate = new Date();
   const dateParts = inputDate.split('.');
   const day = parseInt(dateParts[0], 10);
-  const month = parseInt(dateParts[1], 10) - 1; // Месяцы в JavaScript начинаются с 0
+  const month = parseInt(dateParts[1], 10) - 1;
   const year = parseInt(dateParts[2], 10);
 
   const inputDateTime = new Date(year, month, day).getTime();
@@ -92,7 +91,7 @@ export function formatRelativeDate(inputDate: string): string {
 export function getCalendarDay(inputDate: string): string {
   const dateParts = inputDate.split('.');
   const day = parseInt(dateParts[0], 10);
-  const month = parseInt(dateParts[1], 10) - 1; // Месяцы в JavaScript начинаются с 0
+  const month = parseInt(dateParts[1], 10) - 1;
   const year = parseInt(dateParts[2], 10);
 
   const dayOfWeek = new Date(year, month, day).getDay();

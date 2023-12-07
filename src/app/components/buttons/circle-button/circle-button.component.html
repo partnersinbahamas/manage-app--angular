@@ -1,10 +1,18 @@
 <button
   type="button"
   class="circleButton"
-  (click)="action.emit()"
+  (click)="onEmit()"
 >
   <div class="circleButton__icons">
     <icon [img]="img"></icon>
-    <div class="circleButton__success"></div>
+
+    <div
+      class="circleButton__success"
+      *ngIf="isMove; else container"
+    ></div>
+
+    <ng-template #container>
+      <div class="circleButton__container"></div>
+    </ng-template>
   </div>
 </button>
