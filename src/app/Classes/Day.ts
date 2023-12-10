@@ -1,6 +1,7 @@
+import { Todo } from "../types/todo";
 
 export class Day {
-  todos = [];
+  todos: Todo[] = [];
 
   constructor(
     public date: string,

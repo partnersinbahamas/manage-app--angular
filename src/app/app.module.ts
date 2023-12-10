@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { TodoComponent } from './components/todo/todo.component';
 import { TitleComponent } from './components/title/title.component';
 import { WeeksComponent } from './components/weeks/weeks.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -16,6 +15,8 @@ import { WeekComponent } from './components/weeks/week/week.component';
 import { MonthPipe } from './pipes/month.pipe';
 import { DetailsPageComponent } from './pages/details-page/details-page.component';
 import { CircleButtonComponent } from './components/buttons/circle-button/circle-button.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { TodoFormComponent } from './components/todo/todo-form/todo-form.component';
 
 const routes: Routes = [
   {
@@ -42,7 +43,6 @@ const routes: Routes = [
     LogoComponent,
     NavComponent,
     IconComponent,
-    TodoComponent,
     IconButtonComponent,
     WeeksComponent,
     DayComponent,
@@ -50,6 +50,8 @@ const routes: Routes = [
     MonthPipe,
     DetailsPageComponent,
     CircleButtonComponent,
+    TodoComponent,
+    TodoFormComponent,
   ],
   imports: [
     BrowserModule,

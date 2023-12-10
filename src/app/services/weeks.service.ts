@@ -32,6 +32,11 @@ export class WeeksService {
     this.setCurrentWeek();
   }
 
+  weeksUpdate(weeks: Week[]) {
+    this.weeks$$.next(weeks);
+    this.localeStorage.saveData('weeks', weeks);
+  }
+
   createDay(date: string, array: any[], weekId: number) {
     const weeks = this.weeks$$.getValue();
     const lastDay = weeks[weeks.length - 1]?.days[weeks[weeks.length - 1].days?.length - 1].id || 0
@@ -94,8 +99,8 @@ export class WeeksService {
       newDays
     );
 
-    this.weeks$$.next([...calendar, newWeek]);
-    this.localeStorage.saveData('weeks', [...calendar, newWeek]);
+    const updatedWeeks = [...calendar, newWeek];
+    this.weeksUpdate(updatedWeeks);
   }
   
   // createTodoByDate(date: string) {

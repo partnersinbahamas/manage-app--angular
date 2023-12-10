@@ -1,0 +1,17 @@
+@import '../../../../styles/variables.scss';
+
+.todoForm {
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    box-shadow: $shadow;
+    outline: none;
+    border-color: transparent;
+    
+    &:focus {
+      border-color: $color-blue--focus;
+    }
+  }
+}

@@ -1,3 +1,23 @@
 <section class="detailsPage">
-  <h1>{{selectedDay?.date}}</h1>
+  <div class="detailsPage__container">
+    <div class="detailsPage__shell">
+      <div class="detailsPage__todos">
+        <todo-form />
+  
+        <ul
+          class="detailsPage__wrapper detailsPage__list"
+        >
+          <todo *ngFor="let todo of selectedDay?.todos" [todo]="todo"/>
+        </ul>
+      </div>
+  
+      <div class="detailsPage__wrapper detailsPage__some">
+        <h1>{{selectedDay?.date}}</h1>
+      </div>
+    </div>
+
+    <article class="detailsPage__wrapper detailsPage__article">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro dolores dignissimos obcaecati fugit ex numquam, eligendi ipsa molestiae accusantium necessitatibus quo. Optio eius quo quasi dolore. Consequatur ad aperiam voluptates aut eum adipisci sed, sapiente ab repellendus. Nulla ipsam nostrum est provident. Voluptate impedit, fugiat illum temporibus ipsam inventore accusantium!
+    </article>
+  </div>
 </section>
