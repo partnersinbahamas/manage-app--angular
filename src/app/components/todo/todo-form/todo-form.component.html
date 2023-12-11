@@ -1,8 +1,21 @@
 <form class="todoForm" [formGroup]="formGroup" (ngSubmit)="onTodoAdd()">
-  <input
-    class="todoForm__input"
-    type="text"
-    formControlName="title"
-    placeholder="Type some..."
-  >
+  <div class="todoForm__shell">
+    <input
+      class="todoForm__input"
+      name="title"
+      type="text"
+      formControlName="title"
+      placeholder="Type some..."
+      (input)="message = ''"
+    >
+
+    <button class="todoForm__button" type="submit">
+      <icon [img]="'bx bx-download'" />
+    </button>
+
+  </div>
+
+  <span class="todoForm__error" *ngIf="message.length">
+    {{message}}
+  </span>
 </form>

@@ -1,6 +1,8 @@
 @import '../../../../styles/variables.scss';
 
 .todoForm {
+    position: relative;
+
   &__input {
     box-sizing: border-box;
     width: 100%;
@@ -8,10 +10,42 @@
     background-color: transparent;
     box-shadow: $shadow;
     outline: none;
-    border-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
     
     &:focus {
       border-color: $color-blue--focus;
     }
+  }
+
+  &__shell {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__button {
+    padding: 5px 7px;
+    border: 0px;
+    background-color: transparent;
+    box-shadow: $shadow;
+    border-radius: 10px;
+    transition: box-shadow .3s, transform .1s;
+
+    &:hover {
+      box-shadow: $shadow-hover;
+    }
+
+    &:active {
+      transform: scale(.9);
+    }
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -15px;
+    font-size: 8px;
+    color: $color-red;
   }
 }
