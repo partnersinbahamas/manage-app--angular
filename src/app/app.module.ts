@@ -17,6 +17,9 @@ import { DetailsPageComponent } from './pages/details-page/details-page.componen
 import { CircleButtonComponent } from './components/buttons/circle-button/circle-button.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { TodoFormComponent } from './components/todo/todo-form/todo-form.component';
+import { InputComponent } from './components/inputs/input/input.component';
+import { SelectInputComponent } from './components/inputs/select-input/select-input.component';
+import { ImportantComponent } from './components/important/important.component';
 
 const routes: Routes = [
   {
@@ -52,6 +55,9 @@ const routes: Routes = [
     CircleButtonComponent,
     TodoComponent,
     TodoFormComponent,
+    InputComponent,
+    SelectInputComponent,
+    ImportantComponent,
   ],
   imports: [
     BrowserModule,

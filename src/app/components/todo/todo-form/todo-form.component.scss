@@ -19,6 +19,7 @@
   }
 
   &__shell {
+    width: 100%;
     display: flex;
     gap: 10px;
   }
@@ -47,5 +48,9 @@
     bottom: -15px;
     font-size: 8px;
     color: $color-red;
+  }
+
+  &__importants {
+    background-color: transparent;
   }
 }

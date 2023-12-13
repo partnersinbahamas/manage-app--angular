@@ -1,0 +1,10 @@
+<div class="input" [formGroup]="inputObject.formGroup">
+  <input
+    class="input__input"
+    [name]="name"
+    type="text"
+    [formControlName]="name"
+    [placeholder]="placeholder"
+    (input)="onActionInput.emit()"
+  >
+</div>

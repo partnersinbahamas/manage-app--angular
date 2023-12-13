@@ -1,0 +1,19 @@
+<li
+  class="important"
+  (click)="onSelect.emit($event)"
+  [formGroup]="important.formGroup!"
+>
+
+  <div formGroupName="important">
+    <span
+      [ngClass]="{
+        'important__point': true,
+        'important__point-weak': important.value === 'weak',
+        'important__point-avarage': important.value === 'avarage',
+        'important__point-strong': important.value === 'strong',
+      }"
+    >
+    </span>
+    {{important.label}}
+  </div>
+</li>

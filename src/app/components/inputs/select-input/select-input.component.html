@@ -1,0 +1,34 @@
+<div class="selectInput">
+  <ul
+    [ngClass]="{
+      'selectInput__list': true,
+      'selectInput__list--height': isOpen
+    }"
+  >
+    <h1
+      [ngClass]="{'selectInput__title': true, 'important': isImportant}"
+      (click)="isOpen = !isOpen"
+      style="text-align: center;"
+    >
+      {{selectedLabel}}
+    </h1>
+
+    <!-- <app-important [important]="selectedValue"/> thoughts on this? -->
+  
+    <div
+      [class]="{
+        'selectInput__content': true,
+        'selectInput__content--height': isOpen
+      }"
+    >
+      <div
+        [class]="{
+          'selectInput__content_container': true, 'selectInput__content_container-move': isOpen
+        }"
+      >
+        <ng-content />
+      </div>
+    </div>
+  </ul>
+  
+</div>

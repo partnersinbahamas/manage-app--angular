@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+
+.important {
+  font-size: 12px;
+  padding: 5px;
+  text-align: center;
+  min-width: 50px;
+  position: relative;
+
+  &__point {
+    position: absolute;
+    left: 0;
+    top: 9px;
+    height: 10px;
+    width: 2px;
+    border-radius: 5px;
+    // background-color: red;
+
+    &-weak {
+      background-color: $color-blue;
+    }
+
+    &-avarage {
+      background-color: $color-orange;
+    }
+
+    &-strong {
+      background-color: $color-red;
+    }
+  }
+}

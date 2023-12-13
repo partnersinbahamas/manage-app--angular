@@ -1,18 +1,18 @@
 <form class="todoForm" [formGroup]="formGroup" (ngSubmit)="onTodoAdd()">
   <div class="todoForm__shell">
-    <input
-      class="todoForm__input"
-      name="title"
-      type="text"
-      formControlName="title"
-      placeholder="Type some..."
-      (input)="message = ''"
-    >
+    <app-input [inputObject]="inputObj" (onActionInput)="message = ''" />
 
     <button class="todoForm__button" type="submit">
       <icon [img]="'bx bx-download'" />
     </button>
 
+    <app-select-input [selectInputObj]="inputSelectOnj">
+      <app-important
+        *ngFor="let important of preparetedImportants"
+        [important]="important"
+        (onSelect)="onSelect(important)"
+      />
+    </app-select-input >
   </div>
 
   <span class="todoForm__error" *ngIf="message.length">

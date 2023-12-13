@@ -1,0 +1,22 @@
+@import '../../../../styles/variables.scss';
+
+.input {
+  width: 100%;
+  max-height: 500px;
+  min-width: 300px;
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    box-shadow: $shadow;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 10px;
+        
+    &:focus {
+      border-color: $color-blue--focus;
+    }
+  }
+}

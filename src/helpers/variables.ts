@@ -1,4 +1,6 @@
+import { Important } from "src/app/types/important";
 import { Nav } from "src/app/types/nav";
+import { ImportantsTypes } from "src/app/types/todo";
 
 export const navigations: Nav[] = [
   {
@@ -20,6 +22,27 @@ export const daysOfWeek: string[] = [
   'Wednesday', 'Thursday', 'Friday',
   'Saturday',
 ];
+
+export const importants: Important[] = [
+  {
+    id: 1,
+    value: ImportantsTypes.WEAK,
+    label: 'Weak',
+    formGroup: null,
+  },
+  {
+    id: 2,
+    value: ImportantsTypes.AVARAGE,
+    label: 'Avarage',
+    formGroup: null,
+  },
+  {
+    id: 3,
+    value: ImportantsTypes.STRONG,
+    label: 'Strong',
+    formGroup: null,
+  }
+]
 
 
 export const months: { [key: string]: string } = {
